@@ -16,10 +16,10 @@ void setup(){
 }
 
 void loadImages(){
-  straight_pipe = loadImage("");
-  curved_pipe = loadImage("");
-  three_pipe = loadImage("");
-  four_pipe = loadImage("");
+  straight_pipe = loadImage("straight_pipe.png");
+  curved_pipe = loadImage("curved_pipe.png");
+  three_pipe = loadImage("3waypipe.png");
+  four_pipe = loadImage("4waypipe.png");
 }
 
 void draw(){

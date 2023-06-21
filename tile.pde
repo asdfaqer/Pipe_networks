@@ -27,8 +27,26 @@ class tile{
     this.entrance = e;
   }
   //method
-  void connected(){
-    
-    
+  boolean connected(){
+    switch(this.type){
+      case 1:
+      if((this.entrance == 4 || this.entrance == 2) && (this.rotation == 0 || this.rotation == 2)){
+          return true;
+        }
+        if((this.entrance == 1 || this.entrance == 3) && (this.rotation == 1 || this.rotation == 3)){
+          return true;
+        }
+        return false;
+      case 2:
+        
+        break;
+      case 3:
+        
+        break;
+      case 4:
+        
+        break;
+    }
+    return false;
   }
 }

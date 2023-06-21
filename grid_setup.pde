@@ -42,6 +42,19 @@ void draw_grid(){
             break;
         }  
       }catch(Exception e){}
-    }
+    }   
+  }
+  //outer grid
+  for(int j = 0; j<canvas_definition; j++){
+    rect(padding-25, padding+grid_size*j, 25, grid_size);
+  }
+  for(int j = 0; j<canvas_definition; j++){
+    rect(padding+grid_size*j, padding-25, grid_size, 25);
+  }
+  for(int j = 0; j<canvas_definition; j++){
+    rect(width-padding, padding+grid_size*j, 25, grid_size);
+  }
+  for(int j = 0; j<canvas_definition; j++){
+    rect(padding+grid_size*j, height-padding, grid_size, 25);
   }
 }

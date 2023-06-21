@@ -24,29 +24,37 @@ public void Start(GButton source, GEvent event) { //_CODE_:Start_button:839361:
 synchronized public void win_draw1(PApplet appc, GWinData data) { //_CODE_:window1:758463:
   appc.background(230);
 } //_CODE_:window1:758463:
-int previous_milli = 0;
-synchronized public void key_pressed(PApplet appc, GWinData data, KeyEvent event) { //_CODE_:window1:542730:
+
+synchronized public void key_pressed(PApplet appc, GWinData data, KeyEvent kevent) { //_CODE_:window1:542730:
   println("window1 - key event " + millis());
   switch(appc.key){
-     case 'r':
-        if(millis() - previous_milli > 100 && abs(millis() - previous_milli- 200)>20){
-          cur_orientation = (cur_orientation + 1)%4;
-        }
-        print(cur_orientation);
-        previous_milli = millis();
-        break;
+    case 'r':
+      if(millis() - previous_milli > 100 && abs(millis() - previous_milli- 200)>20){
+        cur_orientation = (cur_orientation + 1)%4;
+      }
+      print(cur_orientation);
+      previous_milli = millis();
+      break;
+   case 's':
+     pipe_type = "delete";
+     break;
   }
 } //_CODE_:window1:434800:
 
 public void dropList1_click1(GDropList source, GEvent event) { //_CODE_:dropList1:532416:
   println("dropList1 - GDropList >> GEvent." + event + " @ " + millis());
   pipe_type = source.getSelectedText();
+  drawing = true;
 } //_CODE_:dropList1:532416:
 
 public void button1_click1(GButton source, GEvent event) { //_CODE_:button1:823717:
   println("button1 - GButton >> GEvent." + event + " @ " + millis());
   
 } //_CODE_:button1:823717:
+
+public void button2_click1(GButton source, GEvent event) { //_CODE_:button2:290036:
+  println("button2 - GButton >> GEvent." + event + " @ " + millis());
+} //_CODE_:button2:290036:
 
 
 
@@ -100,6 +108,9 @@ public void createGUI(){
   label8.setTextAlign(GAlign.LEFT, GAlign.TOP);
   label8.setText("- Hold \"SHIFT\" and click to delete unwanted pipes");
   label8.setOpaque(false);
+  button2 = new GButton(window1, 9, 452, 80, 30);
+  button2.setText("Add Water");
+  button2.addEventHandler(this, "button2_click1");
   window1.loop();
 }
 
@@ -117,3 +128,4 @@ GLabel label5;
 GLabel label6; 
 GLabel label7; 
 GLabel label8; 
+GButton button2; 

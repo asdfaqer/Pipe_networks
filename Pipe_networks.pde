@@ -50,7 +50,8 @@ void loadImages(){
   oil_start = loadImage("oil_start.png");
   oil_end = loadImage("oil_end.png");
 }
-
+int r = 0; // allows the solution to be displayed step by step
+int animation_speed = 5;//min speed = 1, max speed = 10
 void draw(){
   background(255);
   switch(scene){
@@ -61,26 +62,40 @@ void draw(){
       place_pipes();
       break;
     case "computer solving puzzle":
+      animate_solution();
       break;
+  }
+}
+
+void animate_solution(){
+  draw_grid();
+  if(!solution_found && r<100){
+    fill(0);
+    textSize(50);
+    textAlign(CENTER);
+    text("No Path Found",width/2,height/2);
+    r++;
+    fill(255);
+  }
+  else if(solution_found && r<100*path.size()){
+    solve(path.get(r/100));
+    r+=animation_speed;
+  }
+  else{
+    scene = "build mode";
+    path.clear();
+    solution_found = false;
   }
 }
 int cur_liquid;
 int object_being_placed;
 int cur_image = 0;
 int cur_orientation = 0;
-int r = 0;//used to stop flickering
 void place_pipes(){
   switch(pipe_type){
     case "delete":
       cur_image = 0;
-      r++;
       image(erase, mouseX, mouseY, 50, 50);
-      if(!keyPressed||!window1.keyPressed){
-        if(r == 20){
-        pipe_type = dropList1.getSelectedText();
-        r=0;
-        }
-      }
       break;
     case "Straight":
       cur_image = 1;
@@ -102,19 +117,19 @@ void place_pipes(){
       change_rotation();
       image(four_pipe, cursor_x, cursor_y, 50, 50);
       break;
-    case "water_start":
+    case "water start":
       cur_liquid = 1;
       image(water_start, mouseX, mouseY, 50, 50);
       break;
-    case "water_end":
+    case "water end":
       cur_liquid = -1;
       image(water_end, mouseX, mouseY, 50, 50);
       break;
-    case "oil_start":
+    case "oil start":
       cur_liquid = 2;
       image(oil_start, mouseX, mouseY, 50, 50);
       break;
-    case "oil_end":
+    case "oil end":
       cur_liquid = -2;
       image(oil_end, mouseX, mouseY, 50, 50);
       break;
@@ -146,3 +161,4 @@ void change_rotation(){
 //To Do:
 //bottom right and bottom left click doesn't produce expected behaviour.
 //start on the solving algo don't be lazy
+//fix gimicky controls

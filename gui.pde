@@ -26,17 +26,19 @@ synchronized public void win_draw1(PApplet appc, GWinData data) { //_CODE_:windo
 } //_CODE_:window1:758463:
 
 synchronized public void key_pressed(PApplet appc, GWinData data, KeyEvent kevent) { //_CODE_:window1:542730:
-  println("window1 - key event " + millis());
+  println("window1 - key event " + kevent);
   switch(appc.key){
     case 'r':
-      if(millis() - previous_milli > 100 && abs(millis() - previous_milli- 200)>20){
+      if(!appc.keyPressed){
         cur_orientation = (cur_orientation + 1)%4;
       }
       print(cur_orientation);
-      previous_milli = millis();
       break;
    case 's':
      pipe_type = "delete";
+     if(!appc.keyPressed){
+        pipe_type = dropList1.getSelectedText();
+      }
      break;
   }
 } //_CODE_:window1:434800:
@@ -49,11 +51,53 @@ public void dropList1_click1(GDropList source, GEvent event) { //_CODE_:dropList
 
 public void button1_click1(GButton source, GEvent event) { //_CODE_:button1:823717:
   println("button1 - GButton >> GEvent." + event + " @ " + millis());
-  
+  int id = 0;
+  for(int i = 0; i < 4; i++){
+    for(int j = 0; j < canvas_definition; j++){
+      switch(i){
+        case 0:
+          id = j*canvas_definition;
+          break;
+        case 1:
+          id = j;
+          break;
+        case 2:
+          id = 4+j*canvas_definition;
+          break;
+        case 3:
+          id = j + canvas_definition*(canvas_definition-1);
+          break;
+      }
+      switch(flow_path[i][j]){
+        //water
+        case 1://start
+          start = new Tile(id, i+1);
+          break;
+        case -1://end
+          end = new Tile(id, i+1);
+          break;
+        //oil
+        case 2://start
+          break;
+        case -2://end
+          break;
+      }
+    }
+  }
+  println(start.id, start.entrance, end.id, end.entrance);
+  verify();
+  println(Verified_pipes);
+  find_path_to_endpoint(start);
+  println(path);
+  r = 0;
+  scene = "computer solving puzzle";
 } //_CODE_:button1:823717:
 
 public void button2_click1(GButton source, GEvent event) { //_CODE_:button2:290036:
   println("button2 - GButton >> GEvent." + event + " @ " + millis());
+  drawing = false;
+  selecting_start_and_end = true;
+  pipe_type = "water start";
 } //_CODE_:button2:290036:
 
 

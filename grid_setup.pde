@@ -6,7 +6,7 @@ int grid_size;
 void draw_grid(){
   canvas_width = width - 2*padding;
   grid_size = canvas_width/canvas_definition;
-  for(int i = 0; i<5; i++){
+  for(int i = 0; i<canvas_definition; i++){
     for(int j = 0; j<canvas_definition; j++){
       square(grid_size*i+padding,grid_size*j+padding,grid_size);
       try{
@@ -47,14 +47,58 @@ void draw_grid(){
   //outer grid
   for(int j = 0; j<canvas_definition; j++){
     rect(padding-25, padding+grid_size*j, 25, grid_size);
+    try{
+      switch(flow_path[0][j]){
+        case 1:
+          image(water_start, padding-25, padding + grid_size*j - recenter,50,50);
+          break;
+        case -1:
+          image(water_end, padding-25, padding + grid_size*j - recenter,50,50);
+          break;
+      }
+    }
+    catch(Exception e){}
   }
   for(int j = 0; j<canvas_definition; j++){
     rect(padding+grid_size*j, padding-25, grid_size, 25);
+    try{
+      switch(flow_path[1][j]){
+        case 1:
+          image(water_start, padding+grid_size*j - recenter, padding-25,50,50);
+          break;
+        case -1:
+          image(water_end, padding+grid_size*j - recenter, padding-25,50,50);
+          break;
+      }
+    }
+    catch(Exception e){}
   }
   for(int j = 0; j<canvas_definition; j++){
     rect(width-padding, padding+grid_size*j, 25, grid_size);
+    try{
+      switch(flow_path[2][j]){
+        case 1:
+          image(water_start, width-padding, padding+grid_size*j - recenter,50,50);
+          break;
+        case -1:
+          image(water_end, width-padding, padding+grid_size*j - recenter,50,50);
+          break;
+      }
+    }
+    catch(Exception e){}
   }
   for(int j = 0; j<canvas_definition; j++){
     rect(padding+grid_size*j, height-padding, grid_size, 25);
+    try{
+      switch(flow_path[3][j]){
+        case 1:
+          image(water_start, padding+grid_size*j - recenter, height-padding ,50,50);
+          break;
+        case -1:
+          image(water_end, padding+grid_size*j - recenter, height-padding ,50,50);
+          break;
+      }
+    }
+    catch(Exception e){}
   }
 }

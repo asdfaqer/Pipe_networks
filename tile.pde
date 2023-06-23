@@ -1,4 +1,4 @@
-class tile{
+class Tile{
   //fields
   int id;//location of the tile top right 0 and bottom left is n*k in a n by k grid
   int x;
@@ -11,41 +11,62 @@ class tile{
   ArrayList<Integer> connections_dir = new ArrayList<Integer>();
   
   //constructor
-  tile(int i){
+  Tile(int i){
     this.id = i;
-    this.x = this.id % canvas_definition;
-    this.y = this.id - this.x;
-    this.type = cells[this.x][this.y] % 10;
-    this.rotation = cells[this.x][this.y] - this.type;
+    this.x = i % canvas_definition;
+    this.y = i / 10;
+    this.rotation = cells[this.x][this.y] % canvas_definition;
+    this.type = cells[this.x][this.y] / canvas_definition;
   }
-  tile(int i, int e){
+  Tile(int i, int e){
     this.id = i;
-    this.x = this.id % canvas_definition;
-    this.y = this.id - this.x;
-    this.type = cells[this.x][this.y] % 10;
-    this.rotation = cells[this.x][this.y] - this.type;
+    this.x = i % canvas_definition;
+    this.y = i / canvas_definition;
+    this.rotation = cells[i % canvas_definition][i / canvas_definition] % 10;
+    this.type = cells[i % canvas_definition][i / canvas_definition] / 10;
     this.entrance = e;
   }
   //method
   boolean connected(){
     switch(this.type){
       case 1:
-      if((this.entrance == 4 || this.entrance == 2) && (this.rotation == 0 || this.rotation == 2)){
+        if((this.entrance == 4 || this.entrance == 2) && (this.rotation == 1 || this.rotation == 3)){
           return true;
         }
-        if((this.entrance == 1 || this.entrance == 3) && (this.rotation == 1 || this.rotation == 3)){
+        if((this.entrance == 1 || this.entrance == 3) && (this.rotation == 0 || this.rotation == 2)){
           return true;
         }
         return false;
       case 2:
-        
-        break;
+        if((this.entrance == 1 || this.entrance == 2) && (this.rotation == 0)){
+          return true;
+        }
+        if((this.entrance == 2 || this.entrance == 3) && (this.rotation == 1)){
+          return true;
+        }
+        if((this.entrance == 3 || this.entrance == 4) && (this.rotation == 2)){
+          return true;
+        }
+        if((this.entrance == 4 || this.entrance == 1) && (this.rotation == 3)){
+          return true;
+        }
+        return false;
       case 3:
-        
-        break;
+        if((this.entrance == 1) && !(this.rotation == 1)){
+          return true;
+        }
+        if((this.entrance == 2) && !(this.rotation == 2)){
+          return true;
+        }
+        if((this.entrance == 3) && !(this.rotation == 3)){
+          return true;
+        }
+        if((this.entrance == 4) && !(this.rotation == 0)){
+          return true;
+        }
+        return false;
       case 4:
-        
-        break;
+        return true;
     }
     return false;
   }

@@ -68,6 +68,10 @@ synchronized public void key_pressed(PApplet appc, GWinData data, KeyEvent keven
 public void dropList1_click1(GDropList source, GEvent event) { //_CODE_:dropList1:532416:
   println("dropList1 - GDropList >> GEvent." + event + " @ " + millis());
   pipe_type = source.getSelectedText();
+  label14.setText("");
+  if(pipe_type.equals("3 Way") || pipe_type.equals("4 Way")){
+    label14.setText("When solving, " + pipe_type + " pipes often don't work");
+  }
   drawing = true;
 } //_CODE_:dropList1:532416:
 
@@ -279,6 +283,9 @@ public void createGUI(){
   label13.setTextAlign(GAlign.LEFT, GAlign.TOP);
   label13.setText("- Press \"c\" to change background color");
   label13.setOpaque(false);
+  label14 = new GLabel(window1, 140, 196, 140, 40);
+  label14.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  label14.setOpaque(false);
   window1.loop();
 }
 
@@ -306,3 +313,4 @@ GCustomSlider custom_slider2;
 GButton button3; 
 GButton button4; 
 GLabel label13; 
+GLabel label14; 

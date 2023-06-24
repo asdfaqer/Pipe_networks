@@ -19,7 +19,8 @@ int [][] flow_path;//stores the start and end of pipeline
 String pipe_type = "none";
 int cursor_x;
 int cursor_y;
-
+int[][] sample1 = {{0,20,20,20,20},{10,20,20,20,10},{0,0,20,20,10},{0,20,20,10,10},{20,20,0,20,20}};
+int[][] sample1flow = {{0,0,0,0,0},{0,1,0,0,0},{-1,0,0,0,0},{0,0,0,0,0}};
 void setup(){
   cells = new int [canvas_definition][canvas_definition];
   for(int i = 0; i<canvas_definition; i++){
@@ -28,6 +29,7 @@ void setup(){
      }
   }
   flow_path = new int[4][canvas_definition];
+  canvas_definition = 5;
   imageMode(CENTER);
   
   size(600,600);
@@ -70,7 +72,7 @@ void draw(){
 void animate_solution(){
   draw_grid();
   if(!solution_found && r<100){
-    fill(0);
+    fill(255,0,0);
     textSize(50);
     textAlign(CENTER);
     text("No Path Found",width/2,height/2);
@@ -78,6 +80,13 @@ void animate_solution(){
     fill(255);
   }
   else if(solution_found && r<100*path.size()){
+    if(r<100*animation_speed){
+      fill(0,255,0);
+      textSize(50);
+      textAlign(CENTER);
+      text("Path Found",width/2,height/2);
+      fill(255);
+    }
     solve(path.get(r/100));
     r+=animation_speed;
   }

@@ -1,6 +1,6 @@
-int[] rotate_cell(int rotation, int x, int y){
-  int newX=0;
-  int newY=0;
+float[] rotate_cell(int rotation, float x, float y){
+  float newX=0;
+  float newY=0;
   switch(rotation){
     case 0:
       newX = x;
@@ -19,6 +19,6 @@ int[] rotate_cell(int rotation, int x, int y){
       newY= x;
       break;
   }
-  int[]result = {newX,newY};
+  float[]result = {newX,newY};
   return result;
 }

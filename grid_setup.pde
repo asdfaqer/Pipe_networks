@@ -1,43 +1,46 @@
 int padding = 100;
-int canvas_definition = 5;
-int recenter = -42;
+int canvas_definition = 10;
+float recenter = -42;
 int canvas_width;
 int grid_size;
+float scale;
 void draw_grid(){
   canvas_width = width - 2*padding;
   grid_size = canvas_width/canvas_definition;
+  scale = 5.0/canvas_definition;
+  recenter = -42 * scale;
   for(int i = 0; i<canvas_definition; i++){
     for(int j = 0; j<canvas_definition; j++){
       square(grid_size*i+padding,grid_size*j+padding,grid_size);
       try{
         int cell_type = cells[i][j]/10;
         int cell_orientation = cells[i][j] - cell_type*10;
-        int[] pipe_position = {grid_size*i+padding - recenter,grid_size*j+padding - recenter};
+        float[] pipe_position = {grid_size*i+padding - recenter,grid_size*j+padding - recenter};
         switch(cell_type){
           case 0:
             break;
           case 1:
             rotate(cell_orientation*PI/2);
             pipe_position = rotate_cell(cell_orientation, pipe_position[0], pipe_position[1]);
-            image(straight_pipe, pipe_position[0], pipe_position[1],125,125);
+            image(straight_pipe, pipe_position[0], pipe_position[1],125*scale,125*scale);
             rotate(-cell_orientation*PI/2);
             break;
           case 2:
             rotate(cell_orientation*PI/2);
             pipe_position = rotate_cell(cell_orientation, pipe_position[0], pipe_position[1]);
-            image(curved_pipe, pipe_position[0], pipe_position[1],125,125);
+            image(curved_pipe, pipe_position[0], pipe_position[1],125*scale,125*scale);
             rotate(-cell_orientation*PI/2);
             break;
           case 3:
             rotate(cell_orientation*PI/2);
             pipe_position = rotate_cell(cell_orientation, pipe_position[0], pipe_position[1]);
-            image(three_pipe, pipe_position[0], pipe_position[1],125,125);
+            image(three_pipe, pipe_position[0], pipe_position[1],125*scale,125*scale);
             rotate(-cell_orientation*PI/2);
             break;  
           case 4:
             rotate(cell_orientation*PI/2);
             pipe_position = rotate_cell(cell_orientation, pipe_position[0], pipe_position[1]);
-            image(four_pipe,pipe_position[0], pipe_position[1],125,125);
+            image(four_pipe,pipe_position[0], pipe_position[1],125*scale,125*scale);
             rotate(-cell_orientation*PI/2);
             break;
         }  
@@ -50,10 +53,10 @@ void draw_grid(){
     try{
       switch(flow_path[0][j]){
         case 1:
-          image(water_start, padding-25, padding + grid_size*j - recenter,50,50);
+          image(water_start, padding-25, padding + grid_size*j - recenter,50*scale,50*scale);
           break;
         case -1:
-          image(water_end, padding-25, padding + grid_size*j - recenter,50,50);
+          image(water_end, padding-25, padding + grid_size*j - recenter,50*scale,50*scale);
           break;
       }
     }
@@ -64,10 +67,10 @@ void draw_grid(){
     try{
       switch(flow_path[1][j]){
         case 1:
-          image(water_start, padding+grid_size*j - recenter, padding-25,50,50);
+          image(water_start, padding+grid_size*j - recenter, padding-25,50*scale,50*scale);
           break;
         case -1:
-          image(water_end, padding+grid_size*j - recenter, padding-25,50,50);
+          image(water_end, padding+grid_size*j - recenter, padding-25,50*scale,50*scale);
           break;
       }
     }
@@ -78,10 +81,10 @@ void draw_grid(){
     try{
       switch(flow_path[2][j]){
         case 1:
-          image(water_start, width-padding, padding+grid_size*j - recenter,50,50);
+          image(water_start, width-padding - recenter/2, padding+grid_size*j - recenter,50*scale,50*scale);
           break;
         case -1:
-          image(water_end, width-padding, padding+grid_size*j - recenter,50,50);
+          image(water_end, width-padding - recenter/2, padding+grid_size*j - recenter,50*scale,50*scale);
           break;
       }
     }
@@ -92,10 +95,10 @@ void draw_grid(){
     try{
       switch(flow_path[3][j]){
         case 1:
-          image(water_start, padding+grid_size*j - recenter, height-padding ,50,50);
+          image(water_start, padding+grid_size*j - recenter, height-padding - recenter/2 ,50*scale,50*scale);
           break;
         case -1:
-          image(water_end, padding+grid_size*j - recenter, height-padding ,50,50);
+          image(water_end, padding+grid_size*j - recenter, height-padding - recenter/2,50*scale,50*scale);
           break;
       }
     }

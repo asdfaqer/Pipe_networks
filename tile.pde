@@ -64,6 +64,7 @@ class Tile{
         }
         return false;
       case 4:
+        //rotation doesn't matter in a 4 Way
         return true;
     }
     return false;

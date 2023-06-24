@@ -19,6 +19,7 @@ int [][] flow_path;//stores the start and end of pipeline
 String pipe_type = "none";
 int cursor_x;
 int cursor_y;
+//demo maps to test with
 int[][] sample1 = {{0,20,20,20,20},{10,20,20,20,10},{0,0,20,20,10},{0,20,20,10,10},{20,20,0,20,20}};
 int[][] sample1flow = {{0,0,0,0,0},{0,1,0,0,0},{-1,0,0,0,0},{0,0,0,0,0}};
 int[][] sample2 = {

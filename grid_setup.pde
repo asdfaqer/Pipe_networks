@@ -104,7 +104,7 @@ void draw_grid(){
     }
     catch(Exception e){}
   }
-  if(solving && algo.equals("human")){
+  if(solving && algo.equals("human")){//if the user wants to try to sovle the puzzles themself
     int id = 0;
     for(int i = 0; i < 4; i++){
       for(int j = 0; j < canvas_definition; j++){

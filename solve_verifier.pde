@@ -2,6 +2,7 @@ ArrayList<Integer> Verified_pipes = new ArrayList<Integer>();
 ArrayList <Tile> Tiles = new ArrayList<Tile>();
 boolean stop = false;
 boolean verified = false;
+//used for testing purposes and concept learned were transfered to the pipe solver
 void verify(){
   if(end.id == start.id){
     if(start.connected() && end.connected()){

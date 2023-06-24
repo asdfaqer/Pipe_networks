@@ -1,3 +1,6 @@
+//since the rotation is preformed before the tranformations 
+//you need to adjust the tranformation to get the object in the same location 
+//as when it is in another orientation
 float[] rotate_cell(int rotation, float x, float y){
   float newX=0;
   float newY=0;

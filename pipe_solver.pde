@@ -8,11 +8,12 @@ void find_path_to_endpoint(Tile s){
   }
   Tile next_start = null;
   for(int i = 0; i<4; i++){
-    s.rotation = i;
+    s.rotation = i; // 4 states( 0, 1, 2, 3 )
     end.rotation = i;
     if(s.type == 1 && i>=2){
       continue;
     }
+    //if the start and end are connected to the same tile then the path must have been found
     if(s.id == end.id && s.connected() && end.connected()){
       path.add(s.type*1000 + i*100 +s.id);
       solution_found = true;
@@ -23,7 +24,7 @@ void find_path_to_endpoint(Tile s){
       //move start
       switch(s.type){
         case 1:
-          switch(s.entrance){
+          switch(s.entrance){// 1 = left, 2 = up, 3 = right, 4 = down
             case 1:
               if(s.x != canvas_definition - 1){
                 next_start = new Tile(s.id + 1 , s.entrance);

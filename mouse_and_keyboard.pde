@@ -7,7 +7,7 @@ void mousePressed(){
   int y = mouseY - padding;
   if(solving){
     if(algo == "basic"){
-      return;
+      return;//stops the user from interfering with the solving process
     }
     else if(algo == "human"){
       try{

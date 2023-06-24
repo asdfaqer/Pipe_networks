@@ -112,6 +112,9 @@ void keyReleased(){
       else if(algo == "human"){
         algo = "basic";
       }
+    case 'c':
+      background_color = color(random(150,255),random(150,255),random(150,255));
+      break;
   }
 }
 void keyPressed(){

@@ -36,6 +36,9 @@ int[][] sample2flow= {
 {0,0,0,0,0,0,0,0},
 {0,0,-1,0,0,0,0,0},
 {0,0,0,0,0,0,0,0}};
+int homescreen_background_image = int(random(0,4));
+color background_color = color(random(150,255),random(150,255),random(150,255));
+
 void setup(){
   cells = new int [canvas_definition][canvas_definition];
   for(int i = 0; i<canvas_definition; i++){
@@ -71,9 +74,23 @@ int r = 0; // allows the solution to be displayed step by step
 int animation_speed = 5;//min speed = 1, max speed = 10
 String algo = "basic";
 void draw(){
-  background(255);
+  background(background_color);
   switch(scene){
     case "homescreen":
+      switch(homescreen_background_image){
+        case 0:
+          image(straight_pipe,width/2,height/2,width,height);
+          break;
+        case 1:
+          image(curved_pipe,width/2,height/2,width,height);
+          break;
+        case 2:
+          image(three_pipe,width/2,height/2,width,height);
+          break;
+        case 3:
+          image(four_pipe,width/2,height/2,width,height);
+          break;
+      }
       break;
     case "build mode":
       draw_grid();

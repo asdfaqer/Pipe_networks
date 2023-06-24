@@ -51,12 +51,17 @@ synchronized public void key_pressed(PApplet appc, GWinData data, KeyEvent keven
       }
       print(cur_orientation);
       break;
-   case 's':
-     pipe_type = "delete";
-     if(!appc.keyPressed){
+    case 's':
+      pipe_type = "delete";
+      if(!appc.keyPressed){
         pipe_type = dropList1.getSelectedText();
       }
-     break;
+      break;
+    case 'c':
+      if(!appc.keyPressed){
+        background_color = color(random(150,255),random(150,255),random(150,255));
+      }
+      break;
   }
 } //_CODE_:window1:434800:
 
@@ -205,29 +210,29 @@ public void createGUI(){
   label3 = new GLabel(window1, 20, 240, 80, 20);
   label3.setText("Rules:");
   label3.setOpaque(false);
-  label4 = new GLabel(window1, 26, 270, 241, 20);
+  label4 = new GLabel(window1, 24, 262, 241, 20);
   label4.setTextAlign(GAlign.LEFT, GAlign.TOP);
   label4.setText("- Select a pipe type through the drop list");
   label4.setOpaque(false);
-  label5 = new GLabel(window1, 25, 293, 239, 19);
+  label5 = new GLabel(window1, 25, 286, 239, 19);
   label5.setText("- Press \" r \" to rotate the pipe");
   label5.setOpaque(false);
-  label7 = new GLabel(window1, 25, 317, 247, 20);
+  label7 = new GLabel(window1, 25, 306, 247, 20);
   label7.setTextAlign(GAlign.LEFT, GAlign.TOP);
   label7.setText("- Click on the canvas to place the pipe");
   label7.setOpaque(false);
-  label8 = new GLabel(window1, 24, 339, 244, 31);
+  label8 = new GLabel(window1, 23, 328, 244, 31);
   label8.setTextAlign(GAlign.LEFT, GAlign.TOP);
   label8.setText("- Hold \"s\" and click to delete unwanted pipes");
   label8.setOpaque(false);
   button2 = new GButton(window1, 13, 430, 80, 30);
   button2.setText("Select Flow");
   button2.addEventHandler(this, "button2_click1");
-  label6 = new GLabel(window1, 23, 360, 247, 33);
+  label6 = new GLabel(window1, 23, 345, 247, 33);
   label6.setTextAlign(GAlign.LEFT, GAlign.TOP);
   label6.setText("- Click the \"Select Flow\" button to select the flow path of the fluid");
   label6.setOpaque(false);
-  label9 = new GLabel(window1, 22, 396, 248, 20);
+  label9 = new GLabel(window1, 22, 378, 248, 20);
   label9.setTextAlign(GAlign.LEFT, GAlign.TOP);
   label9.setText(" - Click the \"Solve\" button to solve the track");
   label9.setOpaque(false);
@@ -270,6 +275,10 @@ public void createGUI(){
   button4.setText("Sample Grid 2");
   button4.setLocalColorScheme(GCScheme.ORANGE_SCHEME);
   button4.addEventHandler(this, "button4_click1");
+  label13 = new GLabel(window1, 23, 399, 250, 20);
+  label13.setTextAlign(GAlign.LEFT, GAlign.TOP);
+  label13.setText("- Press \"c\" to change background color");
+  label13.setOpaque(false);
   window1.loop();
 }
 
@@ -296,3 +305,4 @@ GLabel label12;
 GCustomSlider custom_slider2; 
 GButton button3; 
 GButton button4; 
+GLabel label13; 

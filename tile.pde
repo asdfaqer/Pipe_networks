@@ -7,14 +7,12 @@ class Tile{
   int rotation;//rotation of the tile
   //only for start and end
   int entrance;// where start and end enter the new tile
-  ArrayList<Integer> connections = new ArrayList<Integer>();
-  ArrayList<Integer> connections_dir = new ArrayList<Integer>();
   
   //constructor
   Tile(int i){
     this.id = i;
     this.x = i % canvas_definition;
-    this.y = i / 10;
+    this.y = i / canvas_definition;
     this.rotation = cells[this.x][this.y] % canvas_definition;
     this.type = cells[this.x][this.y] / canvas_definition;
   }

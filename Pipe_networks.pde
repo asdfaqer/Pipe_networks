@@ -21,6 +21,21 @@ int cursor_x;
 int cursor_y;
 int[][] sample1 = {{0,20,20,20,20},{10,20,20,20,10},{0,0,20,20,10},{0,20,20,10,10},{20,20,0,20,20}};
 int[][] sample1flow = {{0,0,0,0,0},{0,1,0,0,0},{-1,0,0,0,0},{0,0,0,0,0}};
+int[][] sample2 = {
+{00,00,00,00,00,20,20,00},
+{00,00,20,20,00,20,20,00},
+{00,20,20,20,20,20,20,00},
+{00,20,20,20,20,20,00,00},
+{00,20,20,20,20,00,00,00},
+{00,20,20,00,00,00,00,00},
+{00,20,20,00,00,00,00,00},
+{00,20,20,00,00,00,00,00},
+{00,20,20,00,00,00,00,00}};
+int[][] sample2flow= {
+{0,0,0,0,0,0,1,0},
+{0,0,0,0,0,0,0,0},
+{0,0,-1,0,0,0,0,0},
+{0,0,0,0,0,0,0,0}};
 void setup(){
   cells = new int [canvas_definition][canvas_definition];
   for(int i = 0; i<canvas_definition; i++){
@@ -54,6 +69,7 @@ void loadImages(){
 }
 int r = 0; // allows the solution to be displayed step by step
 int animation_speed = 5;//min speed = 1, max speed = 10
+String algo = "basic";
 void draw(){
   background(255);
   switch(scene){
@@ -71,13 +87,21 @@ void draw(){
 
 void animate_solution(){
   draw_grid();
-  if(!solution_found && r<100){
+  if(verified && r<100){
+    fill(0,255,0);
+    textSize(50);
+    textAlign(CENTER);
+    text("Solved",width/2,height/2);
+    fill(255);
+    r++;
+  }
+  else if(!solution_found && r<100){
     fill(255,0,0);
     textSize(50);
     textAlign(CENTER);
     text("No Path Found",width/2,height/2);
-    r++;
     fill(255);
+    r++;
   }
   else if(solution_found && r<100*path.size()){
     if(r<100*animation_speed){
@@ -94,6 +118,7 @@ void animate_solution(){
     scene = "build mode";
     path.clear();
     solution_found = false;
+    solving=false;
   }
 }
 int cur_liquid;

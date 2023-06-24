@@ -104,4 +104,46 @@ void draw_grid(){
     }
     catch(Exception e){}
   }
+  if(solving && algo.equals("human")){
+    int id = 0;
+    for(int i = 0; i < 4; i++){
+      for(int j = 0; j < canvas_definition; j++){
+        switch(i){
+          case 0:
+            id = j*canvas_definition;
+            break;
+          case 1:
+            id = j;
+            break;
+          case 2:
+            id = canvas_definition-1+j*canvas_definition;
+            break;
+          case 3:
+            id = j + canvas_definition*(canvas_definition-1);
+            break;
+        }
+        switch(flow_path[i][j]){
+          //water
+          case 1://start
+            start = new Tile(id, i+1);
+            break;
+          case -1://end
+            end = new Tile(id, i+1);
+            break;
+          //oil
+          case 2://start
+            break;
+          case -2://end
+            break;
+        }
+      }
+    }
+    Verified_pipes.clear();
+    stop=false;
+    verify();
+    if(verified){
+      r = 0;
+      scene = "computer solving puzzle";
+    }
+  }
 }

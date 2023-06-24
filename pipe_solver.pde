@@ -10,6 +10,9 @@ void find_path_to_endpoint(Tile s){
   for(int i = 0; i<4; i++){
     s.rotation = i;
     end.rotation = i;
+    if(s.type == 1 && i>=2){
+      continue;
+    }
     if(s.id == end.id && s.connected() && end.connected()){
       path.add(s.type*1000 + i*100 +s.id);
       solution_found = true;

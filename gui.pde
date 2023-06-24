@@ -79,7 +79,7 @@ public void button1_click1(GButton source, GEvent event) { //_CODE_:button1:8237
           id = j;
           break;
         case 2:
-          id = 4+j*canvas_definition;
+          id = canvas_definition-1+j*canvas_definition;
           break;
         case 3:
           id = j + canvas_definition*(canvas_definition-1);
@@ -101,13 +101,22 @@ public void button1_click1(GButton source, GEvent event) { //_CODE_:button1:8237
       }
     }
   }
-  println(start.id, start.entrance, end.id, end.entrance);
-  verify();
-  println(Verified_pipes);
-  find_path_to_endpoint(start);
-  println(path);
-  r = 0;
-  scene = "computer solving puzzle";
+  switch(algo){
+    case "basic":
+      solving=true;
+      find_path_to_endpoint(start);
+      r = 0;
+      scene = "computer solving puzzle";
+      break;
+    case "human":
+      solving=true;
+      verify();
+      if(verified){
+        r = 0;
+        scene = "computer solving puzzle";
+      }
+      break;
+  }
 } //_CODE_:button1:823717:
 
 public void button2_click1(GButton source, GEvent event) { //_CODE_:button2:290036:
@@ -149,6 +158,17 @@ public void button3_click1(GButton source, GEvent event) { //_CODE_:button3:9905
 
 public void button4_click1(GButton source, GEvent event) { //_CODE_:button4:882794:
   println("button4 - GButton >> GEvent." + event + " @ " + millis());
+  custom_slider1.setValue(8);
+    for(int i = 0; i < 8; i++){
+    for(int j = 0; j < 8; j++){
+      cells[i][j] = sample2[i][j];
+    }
+  }
+  for(int i = 0; i<4; i++){
+    for(int j = 0; j<8; j++){
+      flow_path[i][j] = sample2flow[i][j];
+    }
+  }
 } //_CODE_:button4:882794:
 
 

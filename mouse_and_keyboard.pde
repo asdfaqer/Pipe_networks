@@ -1,9 +1,28 @@
 int previous_milli = 0;
 boolean drawing = false;
 boolean selecting_start_and_end = false;
+boolean solving = false;
 void mousePressed(){
   int x = mouseX - padding;
   int y = mouseY - padding;
+  if(solving){
+    if(algo == "basic"){
+      return;
+    }
+    else if(algo == "human"){
+      try{
+        int grid_x = x/grid_size;
+        int grid_y = y/grid_size;
+        //checks if out of bonds on the right and bottom
+        if(mouseX >= width - padding + 25|| mouseY >= height - padding + 25){
+          return;
+        }
+        //rotates the cell
+        cells[grid_x][grid_y] = ((cells[grid_x][grid_y] + 1)%10)%4 + (cells[grid_x][grid_y]/10)*10;
+      }catch(Exception e){}
+      return;
+    }
+  }
   try{
   int grid_x = x/grid_size;
   int grid_y = y/grid_size;
@@ -78,6 +97,7 @@ void mousePressed(){
   printArray(cells);
   }catch(Exception e){}
 }
+
 void keyReleased(){
   switch(key){
     case 'r':
@@ -85,6 +105,13 @@ void keyReleased(){
         break;
     case 's':
       pipe_type = dropList1.getSelectedText();
+    case 'v':
+      if(algo == "basic"){
+        algo = "human";
+      }
+      else if(algo == "human"){
+        algo = "basic";
+      }
   }
 }
 void keyPressed(){
